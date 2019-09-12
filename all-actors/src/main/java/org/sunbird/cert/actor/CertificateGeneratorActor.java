@@ -267,13 +267,13 @@ public class CertificateGeneratorActor extends BaseActor {
                 sb.append(batchId + "_");
             }
         }  else   {
-            //storage params are not present , save files in public folder
+            // storage params are not present , save files in public folder
             sb.append("public/");
-            File file = new File("public");
         }
-        logger.info("getDirectoryName: " + sb.toString().concat(zipFileName.concat("/")));
-        String concat = sb.toString().concat(zipFileName.concat("/"));
-        return concat;
+        String dirName = sb.toString().concat(zipFileName.concat("/"));
+
+        logger.info("getDirectoryName: " + dirName);
+        return dirName;
     }
 
     /**
@@ -283,6 +283,7 @@ public class CertificateGeneratorActor extends BaseActor {
      */
     private Boolean checkStorageParamsExist(Map<String, String> properties)  {
         Boolean preview = true;
+        // TODO: Fix - What happens if this AWS or something else?
         List<String> keys = Arrays.asList(JsonKey.CONTAINER_NAME, JsonKey.AZURE_STORAGE_KEY, JsonKey.AZURE_STORAGE_SECRET, JsonKey.CLOUD_STORAGE_TYPE);
         for (String key : keys) {
             if (StringUtils.isBlank(properties.get(key))) {
