@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.incredible.UrlManager;
 import org.incredible.certProcessor.CertificateFactory;
 import org.incredible.certProcessor.signature.exceptions.SignatureException;
 import org.incredible.certProcessor.store.CertStoreFactory;
@@ -26,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -146,9 +146,9 @@ public class CertificateVerifierActor extends BaseActor {
         ICertStore certStore = certStoreFactory.getCloudStore(storeConfig);
         certStore.init();
         try {
-            String uri = new URL(url).getPath().substring(1);
             String filePath = "conf/";
-            certStore.get(StringUtils.substringAfter(uri, "/"));
+            String uri = UrlManager.getUri(url);
+            certStore.get(uri);
             File file = new File(filePath + getFileName(uri));
             Map<String, Object> certificate = mapper.readValue(file, new TypeReference<Map<String, Object>>() {
             });

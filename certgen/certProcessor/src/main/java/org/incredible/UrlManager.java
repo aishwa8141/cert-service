@@ -3,6 +3,7 @@ package org.incredible;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class UrlManager {
@@ -33,5 +34,15 @@ public class UrlManager {
         String containerNameStr="/".concat(containerName).concat("/");
         logger.info("UrlManager:removeContainerName:container string formed:".concat(containerNameStr));
         return url.replace(containerNameStr,"");
+    }
+
+    public static String getUri(String pdfUrl) throws MalformedURLException {
+        if (pdfUrl.startsWith("http")) {
+            String uri = StringUtils.substringAfter(new URL(pdfUrl).getPath(), "/");
+            String[] path = uri.split("/");
+            return StringUtils.join(path, "/", path.length - 2, path.length);
+        } else {
+            return pdfUrl;
+        }
     }
 }

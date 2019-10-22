@@ -7,6 +7,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.incredible.CertificateGenerator;
+import org.incredible.UrlManager;
 import org.incredible.certProcessor.CertModel;
 import org.incredible.certProcessor.store.CertStoreFactory;
 import org.incredible.certProcessor.store.ICertStore;
@@ -31,6 +32,8 @@ import scala.Some;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +70,7 @@ public class CertificateGeneratorActor extends BaseActor {
     private void generateSignUrl(Request request) {
         try {
             logger.info("CertificateGeneratorActor:generateSignUrl:generate request got : ".concat(request.getRequest() + ""));
-            String uri = (String) request.getRequest().get(JsonKey.PDF_URL);
+            String uri = UrlManager.getUri((String) request.getRequest().get(JsonKey.PDF_URL));
             logger.info("CertificateGeneratorActor:generateSignUrl:generate sign url method called for uri: ".concat(uri));
             IStorageService storageService = getStorageService();
             String signUrl = storageService.getSignedURL(certVar.getCONTAINER_NAME(), uri, Some.apply(getTimeoutInSeconds()),
