@@ -1,6 +1,10 @@
 package org.incredible.certProcessor.views;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.incredible.certProcessor.JsonKey;
 import org.incredible.certProcessor.store.ICertStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -111,6 +116,15 @@ public class HTMLTemplateZip extends HTMLTemplateProvider {
             URI uri = new URI(zipUrl);
             String path = uri.getPath();
             fileName = path.substring(path.lastIndexOf('/') + 1);
+            if(StringUtils.isNotBlank(uri.getQuery())) {
+                logger.info("zip url query {}", uri.getQuery());
+                List<NameValuePair> params = URLEncodedUtils.parse(new URI(zipUrl), "UTF-8");
+                for (NameValuePair param : params) {
+                    if(StringUtils.equals(JsonKey.ID, param.getName())){
+                        fileName = param.getValue();
+                    }
+                }
+            }
             if (!fileName.endsWith(".zip"))
                 return fileName.concat(".zip");
         } catch (URISyntaxException e) {
