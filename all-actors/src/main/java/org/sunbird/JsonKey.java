@@ -114,4 +114,5 @@ public interface JsonKey {
     String CRITERIA = "criteria";
     String NARRATIVE = "narrative";
     String BASE_PATH = "basePath";
+    String RECIPIENT_PHOTO = "recipientPhoto";
 }

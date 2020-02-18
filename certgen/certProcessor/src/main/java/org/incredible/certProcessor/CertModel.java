@@ -22,6 +22,7 @@ public class CertModel {
 
     private String recipientEmail;
     private String recipientPhone;
+    private String recipientPhoto;
     private String certificateName;
     private String certificateDescription;
     private String certificateLogo;
@@ -178,6 +179,14 @@ public class CertModel {
 
     public void setCriteria(Criteria criteria) {
         this.criteria = criteria;
+    }
+
+    public String getRecipientPhoto() {
+        return recipientPhoto;
+    }
+
+    public void setRecipientPhoto(String recipientPhoto) {
+        this.recipientPhoto = recipientPhoto;
     }
 
     @Override

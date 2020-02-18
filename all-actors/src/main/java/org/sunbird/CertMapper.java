@@ -91,6 +91,7 @@ public class CertMapper {
         certModel.setRecipientEmail((String) data.get(JsonKey.RECIPIENT_EMAIl));
         certModel.setRecipientPhone((String) data.get(JsonKey.RECIPIENT_PHONE));
         certModel.setIdentifier((String) data.get(JsonKey.RECIPIENT_ID));
+        certModel.setRecipientPhoto((String) data.get(JsonKey.RECIPIENT_PHOTO));
         certModel.setValidFrom((String) data.get(JsonKey.VALID_FROM));
         certModel.setExpiry((String) data.get(JsonKey.EXPIRY));
         return certModel;

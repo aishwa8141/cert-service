@@ -50,7 +50,7 @@ public class CertificateFactory {
          *  **/
         compositeIdentityObjectBuilder.setName(certModel.getRecipientName()).setId(certModel.getIdentifier())
                 .setHashed(false).
-                setType(new String[]{JsonKey.ID});
+                setType(new String[]{JsonKey.ID}).setPhoto(certModel.getRecipientPhoto());
 
 
         issuerBuilder.setId(properties.get(JsonKey.ISSUER_URL)).setName(certModel.getIssuer().getName())
@@ -60,7 +60,7 @@ public class CertificateFactory {
          * badge class object
          * **/
 
-        badgeClassBuilder.setName(certModel.getCourseName()).setDescription(certModel.getCertificateDescription())
+        badgeClassBuilder.setName(certModel.getCertificateName()).setDescription(certModel.getCertificateDescription())
                 .setId(properties.get(JsonKey.BADGE_URL)).setCriteria(certModel.getCriteria())
                 .setImage(certModel.getCertificateLogo()).
                 setIssuer(issuerBuilder.build());

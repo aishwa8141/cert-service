@@ -33,6 +33,7 @@ public class HTMLVars {
         //others
         $courseName,
         $qrCodeImage,
+        $recipientPhoto
     }
 }
 

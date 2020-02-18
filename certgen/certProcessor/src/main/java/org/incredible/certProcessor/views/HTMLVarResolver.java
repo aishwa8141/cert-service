@@ -87,4 +87,8 @@ public class HTMLVarResolver {
         return certificateExtension.getExpires();
     }
 
+    public String getRecipientPhoto() {
+        return  certificateExtension.getRecipient().getPhoto();
+    }
+
 }
