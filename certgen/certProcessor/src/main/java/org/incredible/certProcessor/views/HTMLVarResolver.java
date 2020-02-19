@@ -79,7 +79,7 @@ public class HTMLVarResolver {
         return certificateExtension.getBadge().getName();
     }
 
-    public String getcertificateDescription() {
+    public String getCertificateDescription() {
         return certificateExtension.getBadge().getDescription();
     }
 
